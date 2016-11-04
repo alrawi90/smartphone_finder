@@ -1,13 +1,13 @@
 class SmartphoneFinder::CLI
-	def self.start
+	def start
      welcome
      menu
 	end
 
-	def self.welcome
+	def welcome
 		puts "welcome to Smartphone Finder version 1.0"
 	end
-    def self.list
+    def list
     	puts ""
     	puts "----------------------------------------------------------"
     	puts "1- option 1 #print \'1\' to do .."
@@ -16,14 +16,14 @@ class SmartphoneFinder::CLI
     	puts "----------------------------------------------------------"
 
     	puts""
-    def self.option_1
+    def option_1
     		 "I'm option_1"
     	end	
-    def self.option_2
+    def option_2
     	 "I'm option_2"
     	end	
     end
-	def self.menu
+	def menu
 		list
 		puts "choose an option please"
 		input=nil
