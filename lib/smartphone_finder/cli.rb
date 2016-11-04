@@ -16,10 +16,15 @@ class SmartphoneFinder::CLI
     	puts "----------------------------------------------------------"
 
     	puts""
-    def option_1
-    		 "I'm option_1"
+    def search_by_brand
+    	#call scraper to extract brands list
+    	puts "Geting Brands ..."
+    	SmartphoneFinder::Scraper.get_brands
+    	puts ""
+    	puts "Listing brands ..."
+        SmartphoneFinder::Brand.list_all
     	end	
-    def option_2
+    def search_by_keyword
     	 "I'm option_2"
     	end	
     end
@@ -31,9 +36,9 @@ class SmartphoneFinder::CLI
 			puts""
 			input=gets.strip
          if input =="1"
-            puts option_1
+            search_by_brand
          elsif input =="2"
-            puts option_2
+            search_by_keyword
          elsif input=="3"
             	  puts "exit" 
          else
