@@ -36,6 +36,16 @@ class SmartphoneFinder::CLI
         	puts"listing devices ....."
         	brand.list_devices
         	#ask user to choose device index to show specifications
+            puts ""
+            puts "print device index to view relative specifications"
+            input =gets.strip
+            if input.to_i >0
+               device=SmartphoneFinder::Device.all[input.to_i-1]
+               #SmartphoneFinder::Device.list_all
+        	   SmartphoneFinder::Scraper.get_device_spec(device)
+        	else
+        	puts"invalid option"  
+        	end
 
         else
         	puts "invalid input"

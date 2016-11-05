@@ -11,6 +11,15 @@ class SmartphoneFinder::Device
 	def self.all
 	  @@all	
 	end
+	def self.list_all
+		counter=1
+		self.all.each do |device|
+			puts "#{counter}- #{device.url}"
+			counter+=1
+		end
+	    puts "----------------------------------------------------------------"
 
+		
+	end
 
 end

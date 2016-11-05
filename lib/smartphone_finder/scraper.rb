@@ -20,5 +20,20 @@ DOMAIN="http://gsmarena.com/"
       brand.add_device(device)
 	  end
 	end
+   def self.get_device_spec(device)
+   	  spec_table=""
+   	  url=device.url
+	  html= open(DOMAIN+url)
+	  scrapped=Nokogiri::HTML(html)	
+	  scrapped.css("#specs-list table").each do |table|
+	  	spec_table=spec_table + table.css("th").text + ":\n"
+	  	table.css("tr").each do |tr|
+	  		spec_table=spec_table + "  " + tr.css(".ttl a").text + " - " + tr.css(".nfo").text + "\n"
+	  	end
+	  #SmartphoneFinder::Specifiactions.new()
+	  spec_table=spec_table + "--------------------------------------------------------------\n"
+	end
+    puts spec_table
+   end
 
 end
