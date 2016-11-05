@@ -30,10 +30,9 @@ DOMAIN="http://gsmarena.com/"
 	  	table.css("tr").each do |tr|
 	  		spec_table=spec_table + "  " + tr.css(".ttl a").text + " - " + tr.css(".nfo").text + "\n"
 	  	end
-	  #SmartphoneFinder::Specifiactions.new()
 	  spec_table=spec_table + "--------------------------------------------------------------\n"
 	end
-    puts spec_table
+    device.specifications= SmartphoneFinder::Specifications.new(device,spec_table)
    end
 
 end

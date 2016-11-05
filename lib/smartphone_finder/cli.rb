@@ -43,6 +43,7 @@ class SmartphoneFinder::CLI
                device=SmartphoneFinder::Device.all[input.to_i-1]
                #SmartphoneFinder::Device.list_all
         	   SmartphoneFinder::Scraper.get_device_spec(device)
+        	   device.specifications.display
         	else
         	puts"invalid option"  
         	end
