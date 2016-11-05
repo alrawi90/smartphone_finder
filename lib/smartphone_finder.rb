@@ -9,4 +9,5 @@ require_relative "smartphone_finder/scraper"
 module SmartphoneFinder
   # Your code goes here...
   #puts "it works !"
+
 end

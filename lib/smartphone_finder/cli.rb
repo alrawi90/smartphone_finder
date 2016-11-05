@@ -23,6 +23,23 @@ class SmartphoneFinder::CLI
     	puts ""
     	puts "Listing brands ..."
         SmartphoneFinder::Brand.list_all
+        #ask user to choose brand index to list relative devices
+        puts""
+        puts"print brand index to list relative devices"
+        input=gets.strip
+        if input.to_i >0
+        	#call scraper to extract devices list
+        	brand=SmartphoneFinder::Brand.all[input.to_i-1]
+        	SmartphoneFinder::Scraper.get_devices_by_brand(brand)
+        	#listing devices .....
+        	puts""
+        	puts"listing devices ....."
+        	brand.list_devices
+        	#ask user to choose device index to show specifications
+
+        else
+        	puts "invalid input"
+         end
     	end	
     def search_by_keyword
     	 "I'm option_2"

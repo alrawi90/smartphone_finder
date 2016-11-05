@@ -1,10 +1,11 @@
 class SmartphoneFinder::Device
     @@all=[]
     attr_accessor :name ,:url ,:brand
-	def initialize(name,url)
+	def initialize(name,url,brand)
 		@name=name
 		@url=url
-		@all << self
+		@brand=brand
+		@@all << self
 	end
 
 	def self.all
