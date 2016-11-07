@@ -2,16 +2,33 @@ class SmartphoneFinder::Brand
 
     @@all=[]
     attr_accessor :name ,:url ,:devices
-	def initialize(name,url)
+	def initialize(name , url)
+		@name=name 
+		@url= url
 		@devices=[]
-		@name=name
-		@url=url
-		@@all << self
-	end
-
-	def self.all
-	  @@all	
-	end
+	   if ! obj_exist?
+		@@all.push(self)
+	   end
+    end
+    def self.find_by_name(brand_name)
+     	self.all.each do |b|
+		  if b.name.downcase==brand_name.downcase #|| b.name==brand_name.upcase || b.name==brand_name.downcase || b.name=="OnePlus"
+			return b	
+		   end
+		end
+		return SmartphoneFinder::Brand.new(brand_name,nil)
+    end
+    def self.all
+	   @@all 
+     end
+    def obj_exist?
+       @@all.detect{|obj| obj.name == self.name}
+    end
+    def add_device(device)
+      if !self.devices.detect{|obj| obj.name == device.name}
+        devices.push(device)
+      end
+    end
 	def self.list_all #this method will print brands in 3 colomns
 		counter=0
 		indention=" "
@@ -42,9 +59,7 @@ class SmartphoneFinder::Brand
 
 		
 	end
-	def add_device(device)
-		self.devices << device
-	end
+
 	def list_devices
 		counter=0
 		indention=" "
