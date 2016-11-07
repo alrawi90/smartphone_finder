@@ -12,7 +12,7 @@ class SmartphoneFinder::Brand
     end
     def self.find_by_name(brand_name)
      	self.all.each do |b|
-		  if b.name.downcase==brand_name.downcase #|| b.name==brand_name.upcase || b.name==brand_name.downcase || b.name=="OnePlus"
+		  if b.name.downcase==brand_name.downcase 
 			return b	
 		   end
 		end

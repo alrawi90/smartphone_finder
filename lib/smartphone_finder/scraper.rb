@@ -34,5 +34,21 @@ DOMAIN="http://gsmarena.com/"
 	end
     device.specifications= SmartphoneFinder::Specifications.new(device,spec_table)
    end
-
+   def self.get_by_keyword(keyword)
+         self.get_brands
+         search_results=[]
+         html =  open(DOMAIN+"results.php3?sQuickSearch=yes&sName="+keyword)
+         scrapped = Nokogiri::HTML(html)
+         scrapped.css("div.makers ul a").each do |a|
+            device_name_no_php=a.attribute("href").value.split("-")
+            device_name_collector=device_name_no_php[0].split("_");
+            brand=SmartphoneFinder::Brand.find_by_name(device_name_collector[0])
+            device_name_collector.shift
+            device_name=device_name_collector.join(" ")
+            device=SmartphoneFinder::Device.new(device_name,a.attribute("href").value,brand)
+            brand.add_device(device)
+            search_results.push(brand.name + ": " +device_name)
+         end
+       search_results
+   end
 end
