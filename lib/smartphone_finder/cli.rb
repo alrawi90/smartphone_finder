@@ -20,12 +20,9 @@ class SmartphoneFinder::CLI
     	puts""
     end	
     def search_by_brand
-    	#call scraper to extract brands list
-    	puts "Geting Brands ..."
-    	SmartphoneFinder::Scraper.get_brands
-    	puts ""
-    	puts "Listing brands ..."
-        SmartphoneFinder::Brand.list_all
+
+    	#get and display brands
+        show_brands
         #ask user to choose brand index to list relative devices
         puts""
         puts"print brand index to list relative devices"
@@ -41,8 +38,17 @@ class SmartphoneFinder::CLI
         	list 
         	end
 
- 
     	end	
+      def show_brands
+	      	#call scraper to extract brands list
+	    	puts "Geting Brands ..."
+	    	SmartphoneFinder::Scraper.get_brands
+	    	puts ""
+	    	puts "Listing all brands ..."
+	    	puts""
+	        SmartphoneFinder::Brand.list_all
+
+      end	
       def show_devices(index)
       	  #call scraper to extract devices list
           SmartphoneFinder::Scraper.get_devices_by_brand(SmartphoneFinder::Brand.all[index])
@@ -91,7 +97,7 @@ class SmartphoneFinder::CLI
 	          list
 	       else
 	         self.search_results= SmartphoneFinder::Scraper.get_by_keyword(keyword)
-				if self.search_results.size>0
+			 if self.search_results.size>0
 	            list_search_results
 	            show_device_spec("1")
 	         else 
@@ -99,7 +105,7 @@ class SmartphoneFinder::CLI
 	          response=gets.strip
 	          if response=="y" || response=="yes" || response=="Y" || response=="Yes" || response=="YES"
 	            search_by_keyword
-	           else 
+	          else 
 	           list
 	           end 
 	        end
@@ -109,6 +115,7 @@ class SmartphoneFinder::CLI
           puts "Print device index to show related speceifications , Print \'(R)etry\' to try different keyword , OR Print \'menu\' to list the main menu"
           input_ = gets.strip
           index_=input_.to_i-1
+
           if input_=="menu"
             list
           elsif input_=="R" || input_=="r" || input_=="retry" || input_=="Retry" || input_=="RETRY"
