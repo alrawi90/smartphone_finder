@@ -56,6 +56,8 @@ class SmartphoneFinder::CLI
          end
     	end	
     def list_results #this method will print in 3 colomns
+    	    puts "Listing search results  ........"
+
 		counter=0
 		indention=" "
 		extra=" "	
@@ -86,6 +88,7 @@ class SmartphoneFinder::CLI
 		
 	end
     def search_by_keyword
+    	puts "please print a keyword to search .."
     	 keyword=gets.strip
     	 self.search_results= SmartphoneFinder::Scraper.get_by_keyword(keyword)
     	 list_results
