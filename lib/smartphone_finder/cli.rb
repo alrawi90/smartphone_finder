@@ -55,9 +55,8 @@ class SmartphoneFinder::CLI
         	puts "invalid input"
          end
     	end	
-    def list_results #this method will print in 3 colomns
+    def list_search_results #this method will print in 3 colomns
     	    puts "Listing search results  ........"
-
 		counter=0
 		indention=" "
 		extra=" "	
@@ -88,12 +87,27 @@ class SmartphoneFinder::CLI
 		
 	end
     def search_by_keyword
-    	puts "please print a keyword to search .."
-    	 keyword=gets.strip
-    	 self.search_results= SmartphoneFinder::Scraper.get_by_keyword(keyword)
-    	 list_results
-
-    end
+	     puts"-------------------------------------------------"
+	     puts "Print your desired keyword here  OR Print \'menu\' to list the main menu"
+	       keyword = gets.strip
+	       if keyword=="menu"
+	          list
+	       else
+	         self.search_results= SmartphoneFinder::Scraper.get_by_keyword(keyword)
+				if self.search_results.size>0
+	            list_search_results
+	            
+	         else 
+	          puts "No result meet your search , please try different keyword. Would you like to try again ? Y(es) or N(o)"
+	          response=gets.strip
+	          if response=="y" || response=="yes" || response=="Y" || response=="Yes" || response=="YES"
+	            search_by_keyword
+	           else 
+	           list
+	           end 
+	        end
+	     end
+	end
 	def menu
 		list
 		puts "choose an option please"
