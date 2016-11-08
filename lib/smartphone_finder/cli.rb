@@ -100,7 +100,7 @@ class SmartphoneFinder::CLI
 	         self.search_results= SmartphoneFinder::Scraper.get_by_keyword(keyword)
 				if self.search_results.size>0
 	            list_search_results
-	            show_device_spec("1")
+	            #show_device_spec("1")
 	         else 
 	          puts "No result meet your search , please try different keyword. Would you like to try again ? Y(es) or N(o)"
 	          response=gets.strip
