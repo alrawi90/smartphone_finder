@@ -7,6 +7,7 @@ class SmartphoneFinder::CLI
 	end
 
 	def welcome
+		puts""
 		puts "welcome to Smartphone Finder version 1.0"
 	end
     def list
@@ -25,7 +26,7 @@ class SmartphoneFinder::CLI
         show_brands
         #ask user to choose brand index to list relative devices
         puts""
-        puts"print brand index to list relative devices"
+        puts"print brand index to list relative devices OR Print \'menu\' to list the main menu"
         input=gets.strip
         if input.to_i >0
         	#get and display devices
@@ -34,7 +35,7 @@ class SmartphoneFinder::CLI
             puts ""
         	show_device_spec("1",input.to_i-1)
         else
-        	puts"invalid option" 
+        	#puts"invalid option" 
         	list 
         	end
 
@@ -46,7 +47,7 @@ class SmartphoneFinder::CLI
 	    	puts ""
 	    	puts "Listing all brands ..."
 	    	puts""
-	        SmartphoneFinder::Brand.list_all
+	        SmartphoneFinder::Brand.list_all 
 
       end	
       def show_devices(index)
@@ -58,7 +59,7 @@ class SmartphoneFinder::CLI
           (SmartphoneFinder::Brand.all[index]).list_devices  
       end
   	
-    def list_search_results #this method will print in 3 colomns
+    def show_search_results #this method will print in 3 colomns
     	    puts "Listing search results  ........"
 		counter=0
 		indention=" "
@@ -98,8 +99,8 @@ class SmartphoneFinder::CLI
 	       else
 	         self.search_results= SmartphoneFinder::Scraper.get_by_keyword(keyword)
 			 if self.search_results.size>0
-	            list_search_results
-	            show_device_spec("1")
+	            show_search_results
+	            show_device_spec("2")
 	         else 
 	          puts "No result meet your search , please try different keyword. Would you like to try again ? Y(es) or N(o)"
 	          response=gets.strip
@@ -112,19 +113,19 @@ class SmartphoneFinder::CLI
 	     end
 	end
     def show_device_spec(option,index=nil)
-          puts "Print device index to show related speceifications , Print \'(R)etry\' to try different keyword , OR Print \'menu\' to list the main menu"
-          input_ = gets.strip
+	       if option=="1"
+             puts "Print device index to show related speceifications , Print \'(B)ack\' to go to brevious menu , OR Print \'menu\' to list the main menu"
+           else 
+		    puts "Print device index to show related speceifications , Print \'(R)etry\' to try different keyword , OR Print \'menu\' to list the main menu"
+           end
+		  input_ = gets.strip
           index_=input_.to_i-1
 
-          if input_=="menu"
-            list
-          elsif input_=="R" || input_=="r" || input_=="retry" || input_=="Retry" || input_=="RETRY"
-               search_by_keyword 
-          else  
+		  if input_.to_i >0
             SmartphoneFinder::Scraper.get_device_spec(SmartphoneFinder::Device.all[index_])
             puts "Displaying specifications for #{(SmartphoneFinder::Device.all[index_]).name} devices ........"
             SmartphoneFinder::Device.all[index_].specifications.display
-            puts""
+            puts""            
             #show navigation options
             puts " Print \'menu\' for main menu , Print \'(B)ack\' to go to brevious list "
              response=gets.strip
@@ -134,8 +135,14 @@ class SmartphoneFinder::CLI
               show_device_spec(option, index )
             else 
              list
-           end 
-       end
+           end
+          elsif (input_=="R" || input_=="r" || input_=="retry" || input_=="Retry" || input_=="RETRY") && option=="2" 
+               search_by_keyword 
+          elsif (input_=="B" || input_=="b" || input_=="back" || input_=="Back" || input_=="BACK") && option=="1" 
+               search_by_brand
+          else#menu
+            list			   
+         end
     end
 	
 	def menu
@@ -150,9 +157,12 @@ class SmartphoneFinder::CLI
          elsif input =="2"
             search_by_keyword
          elsif input=="3"
-            	  puts "exit" 
+         	puts""
+            puts "Thank you for using Smartphone Finder" 
+            puts""
+
          else
-         	
+
         end
 		end
 	end
