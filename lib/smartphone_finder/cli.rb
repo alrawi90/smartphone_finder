@@ -31,13 +31,8 @@ class SmartphoneFinder::CLI
         puts"print brand index to list relative devices"
         input=gets.strip
         if input.to_i >0
-        	#call scraper to extract devices list
-        	brand=SmartphoneFinder::Brand.all[input.to_i-1]
-        	SmartphoneFinder::Scraper.get_devices_by_brand(brand)
-        	#listing devices .....
-        	puts""
-        	puts"listing devices ....."
-        	brand.list_devices
+        	#get and display devices
+            show_devices(input.to_i)
         	#ask user to choose device index to show specifications
             puts ""
             puts "print device index to view relative specifications"
@@ -55,6 +50,15 @@ class SmartphoneFinder::CLI
         	puts "invalid input"
          end
     	end	
+      def show_devices(index)
+      	  #call scraper to extract devices list
+          SmartphoneFinder::Scraper.get_devices_by_brand(SmartphoneFinder::Brand.all[index])
+          #listing devices .....
+          puts""
+          puts "Listing #{SmartphoneFinder::Brand.all[index].name} devices ........"
+          (SmartphoneFinder::Brand.all[index]).list_devices  
+      end
+  	
     def list_search_results #this method will print in 3 colomns
     	    puts "Listing search results  ........"
 		counter=0
@@ -96,7 +100,7 @@ class SmartphoneFinder::CLI
 	         self.search_results= SmartphoneFinder::Scraper.get_by_keyword(keyword)
 				if self.search_results.size>0
 	            list_search_results
-	            
+	            show_device_spec("1")
 	         else 
 	          puts "No result meet your search , please try different keyword. Would you like to try again ? Y(es) or N(o)"
 	          response=gets.strip
@@ -108,6 +112,7 @@ class SmartphoneFinder::CLI
 	        end
 	     end
 	end
+
 	def menu
 		list
 		puts "choose an option please"
