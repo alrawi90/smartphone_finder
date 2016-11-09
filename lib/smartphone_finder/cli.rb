@@ -140,7 +140,7 @@ class SmartphoneFinder::CLI
                search_by_keyword 
           elsif (input_=="B" || input_=="b" || input_=="back" || input_=="Back" || input_=="BACK") && option=="1" 
                search_by_brand
-          else#menu
+          else
             list			   
          end
     end
