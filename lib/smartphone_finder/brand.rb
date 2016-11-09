@@ -1,5 +1,7 @@
-class SmartphoneFinder::Brand
+require_relative '../concerns/helper_methods.rb'
 
+class SmartphoneFinder::Brand
+    include HelperMethods
     @@all=[]
     attr_accessor :name ,:url ,:devices
 	def initialize(name , url)
@@ -21,9 +23,7 @@ class SmartphoneFinder::Brand
     def self.all
 	   @@all 
      end
-    def obj_exist?
-       @@all.detect{|obj| obj.name == self.name}
-    end
+
     def add_device(device)
       if !self.devices.detect{|obj| obj.name == device.name}
         devices.push(device)
