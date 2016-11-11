@@ -2,6 +2,7 @@ require_relative '../concerns/helper_methods.rb'
 
 class SmartphoneFinder::Brand
     include HelperMethods
+    extend HelperMethods
     @@all=[]
     attr_accessor :name ,:url ,:devices
 	def initialize(name , url)
