@@ -1,3 +1,4 @@
 #!/usr/bin/env ruby
-require_relative '../lib/smartphone_finder/'
+#require_relative '../lib/smartphone_finder/'
+require './lib/smartphone_finder.rb'
 SmartphoneFinder::CLI.new.start
