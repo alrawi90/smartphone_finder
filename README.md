@@ -23,7 +23,7 @@ Or install it yourself as:
 
 ## Usage
 
-TODO: Write usage instructions here
+Run: `smartphone_finder` after installing the gem to start cli app.
 
 ## Development
 

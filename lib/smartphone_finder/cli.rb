@@ -9,7 +9,7 @@ class SmartphoneFinder::CLI
 
 	  def welcome
 		  puts ""
-		  puts "welcome to Smartphone Finder version 1.0"
+		  puts "welcome to Smartphone Finder version #{SmartphoneFinder::VERSION}"
 	  end
     def list
     	puts ""
