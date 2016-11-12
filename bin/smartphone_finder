@@ -1,4 +1,5 @@
 #!/usr/bin/env ruby
-#require_relative '../lib/smartphone_finder/'
-require './lib/smartphone_finder.rb'
+require_relative '../lib/smartphone_finder.rb'
+#require File.expand_path("../smartphone_finder", __FILE__)
+#require '../lib/smartphone_finder.rb'
 SmartphoneFinder::CLI.new.start

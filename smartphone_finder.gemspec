@@ -11,7 +11,7 @@ Gem::Specification.new do |spec|
   spec.homepage      = 'https://github.com/alrawi90/smartphone_finder'
   spec.license       = 'MIT'
 
-  spec.files         = ['./lib/smartphone_finder']
+  spec.files         = `git ls-files`.split($\)#['./lib/smartphone_finder']
 
   spec.executables   = ["smartphone_finder"]
   #spec.test_files    = spec.files.grep(%r{^(test|spec|features)/})
