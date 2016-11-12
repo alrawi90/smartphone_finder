@@ -20,7 +20,7 @@ def list_all #this method will print brands in 3 colomns
             elsif self.all.size - counter  >=2
              col_1=self.all[counter].name ; col_1_spc=indention*(width - col_1.length)
              col_2=self.all[counter+1].name ;
-             puts "#{counter+1}- {extra}#{col_1}#{col_1_spc}#{counter+2}- #{extra}#{col_2}"
+             puts "#{counter+1}- #{extra}#{col_1}#{col_1_spc}#{counter+2}- #{extra}#{col_2}"
             elsif self.all.size - counter  >=1
              col_1=self.all[counter].name ;
              puts "#{counter+1}- #{extra}#{col_1}"
