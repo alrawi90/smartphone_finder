@@ -1,7 +1,7 @@
 # SmartphoneFinder
 
-Welcome to Smartphone Finder Cli Application .with this Application you can search online and find your favorate
-Mobiles,Tabs and SmartWatch Specifications and price ranges .
+Welcome to Smartphone Finder Cli Application .with this Application you can search online and find your favorite 
+Mobiles,Tabs and SmartWatches Specifications and price ranges .
 
 This App use the famous website www.gsmarena.com to Scrape the information online .
 

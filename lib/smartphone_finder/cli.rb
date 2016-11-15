@@ -116,7 +116,7 @@ class SmartphoneFinder::CLI
                 show_device_spec(option, index )
               else 
                list
-             end
+              end
           elsif (input_.downcase=="r" || input_.downcase=="retry") && option=="2" 
                search_by_keyword 
           elsif (input_.downcase=="b" || input_.downcase=="back") && option=="1" 

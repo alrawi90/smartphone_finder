@@ -9,9 +9,9 @@ class SmartphoneFinder::Brand
 		@name=name 
 		@url= url
 		@devices=[]
-	   if ! obj_exist?
-		@@all.push(self)
-	   end
+	    if ! obj_exist?
+		  @@all.push(self)
+	    end
     end
     def self.find_by_name(brand_name)
      	self.all.each do |b|

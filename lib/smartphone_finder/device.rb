@@ -3,8 +3,8 @@ require_relative '../concerns/helper_methods.rb'
 class SmartphoneFinder::Device
 	include HelperMethods
 	extend  HelperMethods
-    @@all=[]
-    attr_accessor :name ,:url ,:brand ,:specifications
+  @@all=[]
+  attr_accessor :name ,:url ,:brand ,:specifications
 	def initialize(name,url,brand=nil)
 	  @specifications=nil
       @name=name
@@ -12,12 +12,12 @@ class SmartphoneFinder::Device
       @brand=brand
       if ! obj_exist?
         @@all.push(self)
-       end
+      end
 	end
 
 	def self.all
 	   @@all 
-    end
+  end
 
 
 end

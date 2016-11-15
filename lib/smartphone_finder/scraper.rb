@@ -1,5 +1,5 @@
 class SmartphoneFinder::Scraper
-DOMAIN="http://gsmarena.com/"
+    DOMAIN="http://gsmarena.com/"
 
 
 	def self.get_brands
@@ -30,7 +30,7 @@ DOMAIN="http://gsmarena.com/"
 	  	table.css("tr").each do |tr|
 	  		spec_table=spec_table + "  " + tr.css(".ttl a").text + " - " + tr.css(".nfo").text + "\n"
 	  	end
-	  spec_table=spec_table + "--------------------------------------------------------------\n"
+	    spec_table=spec_table + "--------------------------------------------------------------\n"
 	end
     device.specifications= SmartphoneFinder::Specifications.new(device,spec_table)
    end
@@ -49,6 +49,6 @@ DOMAIN="http://gsmarena.com/"
             brand.add_device(device)
             search_results.push(brand.name + ": " +device_name)
          end
-       search_results
+         search_results
    end
 end
