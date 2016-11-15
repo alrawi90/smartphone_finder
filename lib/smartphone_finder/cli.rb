@@ -1,5 +1,8 @@
+require_relative '../concerns/helper_methods.rb'
+
 class SmartphoneFinder::CLI
-	  @search_results=[]
+    include HelperMethods
+ 	  @search_results=[]
 
     attr_accessor :search_results
 	  def start
@@ -14,9 +17,9 @@ class SmartphoneFinder::CLI
     def list
     	puts ""
     	puts "-----------------------Main Menu------------------------------------------------------------#"
-    	puts "1- Search by brand   #print \'1\' to browse brands and related devices online on gsmarena.com |"
-    	puts "2- Search by keyword #print \'2\' to search for specifed keyword online on gsmarena.com       |" 
-    	puts "3- Exit              #print \'3\' to End application.                                         |"
+    	puts "1- Search by brand   #print '1' to browse brands and related devices online on gsmarena.com |"
+    	puts "2- Search by keyword #print '2' to search for specifed keyword online on gsmarena.com       |" 
+    	puts "3- Exit              #print '3' to End application.                                         |"
     	puts "--------------------------------------------------------------------------------------------#"
     	puts ""
       puts "choose an option please"
@@ -28,16 +31,16 @@ class SmartphoneFinder::CLI
         show_brands
         #ask user to choose brand index to list relative devices
         puts""
-        puts"print brand index to list relative devices OR Print \'menu\' to list the main menu"
+        puts"print brand index to list relative devices OR Print 'menu' to list the main menu"
         input=gets.strip.to_i-1
         if input>0
         	#get and display devices
             show_devices(input)
             #choose a device and get/display device specifications
             puts ""
-        	show_device_spec("1",input)
+        	  show_device_spec("1",input)
         else
-        	#puts"invalid option" 
+        	#puts "invalid option" 
         	list 
         	end
 
@@ -49,7 +52,7 @@ class SmartphoneFinder::CLI
 	    	puts ""
 	    	puts "Listing all brands ..."
 	    	puts ""
-	        SmartphoneFinder::Brand.list_all 
+	      SmartphoneFinder::Brand.list_brands
 
       end	
       def show_devices(index)
@@ -58,52 +61,28 @@ class SmartphoneFinder::CLI
           #listing devices .....
           puts ""
           puts "Listing #{SmartphoneFinder::Brand.all[index].name} devices ........"
+          puts ""
           (SmartphoneFinder::Brand.all[index]).list_devices  
       end
   	
-      def show_search_results #this method will print in 3 colomns
+      def show_search_results 
     	  puts "Listing search results  ........"
-    		counter=0
-    		indention=" "
-    		extra=" "	
-    		width=50
-
-    		while counter <self.search_results.size
-    			    counter <9 ? extra=" " : extra=""
-    			    if self.search_results.size - counter  >=3
-                 col_1=self.search_results[counter]; col_1_spc=indention*(width - col_1.length)
-                 col_2=self.search_results[counter+1] ;col_2_spc=indention*(width - col_2.length)
-                 col_3=self.search_results[counter+2];
-
-                 puts "#{counter+1}- #{extra}#{col_1}#{col_1_spc}#{counter+2}- #{extra}#{col_2}#{col_2_spc}#{counter+3}- #{extra}#{col_3}"
-              elsif self.search_results.size - counter  >=2
-                 col_1=self.search_results[counter]; col_1_spc=indention*(width - col_1.length)
-                 col_2=self.search_results[counter+1];
-                 puts "#{counter+1}- {extra}#{col_1}#{col_1_spc}#{counter+2}- #{extra}#{col_2}"
-              elsif self.search_results.size - counter  >=1
-                 col_1=self.search_results[counter];
-                 puts "#{counter+1}- #{extra}#{col_1}"
-
-    			    end
-    			counter+=3
-    		end
-
-    	    puts "----------------------------------------------------------------"
-
+        puts ""
+            self.list_all(self.search_results,"2")
     		
 	    end
       def search_by_keyword
   	     puts "-------------------------------------------------"
-  	     puts "Print your desired keyword here  OR Print \'menu\' to list the main menu"
-  	       keyword = gets.strip
-  	       if keyword=="menu"
+  	     puts "Print your desired keyword here  OR Print 'menu' to list the main menu"
+  	     keyword = gets.strip
+  	     if keyword=="menu"
   	          list
-  	       else
+  	     else
   	         self.search_results= SmartphoneFinder::Scraper.get_by_keyword(keyword)
   			 if self.search_results.size>0
   	            show_search_results
   	            show_device_spec("2")
-  	         else 
+  	     else 
   	          puts "No result meet your search , please try different keyword. Would you like to try again ? Y(es) or N(o)"
   	          response=gets.strip
   	          if response.downcase=="y" || response.downcase=="yes" 
@@ -116,28 +95,28 @@ class SmartphoneFinder::CLI
 	    end
       def show_device_spec(option,index=nil)
 	         if option=="1"
-             puts "Print device index to show related speceifications , Print \'(B)ack\' to go to brevious menu , OR Print \'menu\' to list the main menu"
+             puts "Print device index to show related speceifications , Print '(B)ack' to go to brevious menu , OR Print 'menu' to list the main menu"
            else 
-		          puts "Print device index to show related speceifications , Print \'(R)etry\' to try different keyword , OR Print \'menu\' to list the main menu"
+		          puts "Print device index to show related speceifications , Print '(R)etry' to try different keyword , OR Print 'menu' to list the main menu"
            end
 		      input_ = gets.strip
           index_=input_.to_i-1
 
 		      if input_.to_i >0
-            SmartphoneFinder::Scraper.get_device_spec(SmartphoneFinder::Device.all[index_])
-            puts "Displaying specifications for #{(SmartphoneFinder::Device.all[index_]).name} devices ........"
-            SmartphoneFinder::Device.all[index_].specifications.display
-            puts ""            
-            #show navigation options
-            puts " Print \'menu\' for main menu , Print \'(B)ack\' to go to brevious list "
-             response=gets.strip
-            if response.downcase=="b" || response.downcase=="back" 
+              SmartphoneFinder::Scraper.get_device_spec(SmartphoneFinder::Device.all[index_])
+              puts "Displaying specifications for #{(SmartphoneFinder::Device.all[index_]).name} devices ........"
+              SmartphoneFinder::Device.all[index_].specifications.display
+              puts ""            
+              #show navigation options
+              puts " Print 'menu' for main menu , Print '(B)ack' to go to brevious list "
+              response=gets.strip
+              if response.downcase=="b" || response.downcase=="back" 
 
-              option=="2" ? show_search_results : show_devices(index)
-              show_device_spec(option, index )
-            else 
-             list
-           end
+                option=="2" ? show_search_results : show_devices(index)
+                show_device_spec(option, index )
+              else 
+               list
+             end
           elsif (input_.downcase=="r" || input_.downcase=="retry") && option=="2" 
                search_by_keyword 
           elsif (input_.downcase=="b" || input_.downcase=="back") && option=="1" 
