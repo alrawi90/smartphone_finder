@@ -68,7 +68,7 @@ class SmartphoneFinder::CLI
       def show_search_results 
     	  puts "Listing search results  ........"
         puts ""
-            self.list_all(self.search_results,"2")
+            self.list_all(self.search_results)
     		
 	    end
       def search_by_keyword
