@@ -31,10 +31,10 @@ class SmartphoneFinder::Brand
       end
     end
 	def self.list_brands
-		self.list_all(self.all,"1")	
+		self.list_all(self.all.collect { |obj| obj.name  })	
 	end
 	def list_devices
-	    self.list_all(self.devices,"1")
+	    self.list_all(self.devices.collect { |obj| obj.name  })
 	end
 	
 end
