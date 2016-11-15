@@ -10,7 +10,7 @@ This App use the famous website www.gsmarena.com to Scrape the information onlin
 Add this line to your application's Gemfile:
 
 ```ruby
-gem 'smartphone_finder'
+gem 'smartphone_finder-cli'
 ```
 
 And then execute:
@@ -19,7 +19,7 @@ And then execute:
 
 Or install it yourself as:
 
-    $ gem install smartphone_finder
+    $ gem install smartphone_finder-cli
 
 ## Usage
 
