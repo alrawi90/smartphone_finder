@@ -17,9 +17,9 @@ class SmartphoneFinder::CLI
     def list
     	puts ""
     	puts "-----------------------Main Menu------------------------------------------------------------#"
-    	puts "1- Search by brand   #print '1' to browse brands and related devices online on gsmarena.com |"
-    	puts "2- Search by keyword #print '2' to search for specifed keyword online on gsmarena.com       |" 
-    	puts "3- Exit              #print '3' to End application.                                         |"
+    	puts "1- Search by brand   #Enter '1' to browse brands and related devices online on gsmarena.com |"
+    	puts "2- Search by keyword #Enter '2' to search for specifed keyword online on gsmarena.com       |" 
+    	puts "3- Exit              #Enter '3' to End application.                                         |"
     	puts "--------------------------------------------------------------------------------------------#"
     	puts ""
       puts "choose an option please"
@@ -31,7 +31,7 @@ class SmartphoneFinder::CLI
         show_brands
         #ask user to choose brand index to list relative devices
         puts""
-        puts"print brand index to list relative devices OR Print 'menu' to list the main menu"
+        puts"Enter brand index to list relative devices OR Enter 'menu' to list the main menu"
         input=gets.strip.to_i
         if input>0 && input <= SmartphoneFinder::Brand.all.size
         	#get and display devices
@@ -79,7 +79,7 @@ class SmartphoneFinder::CLI
 	    end
       def search_by_keyword
   	     puts "-------------------------------------------------"
-  	     puts "Print your desired keyword here  OR Print 'menu' to list the main menu"
+  	     puts "Enter your desired keyword here  OR Enter 'menu' to list the main menu"
   	     keyword = gets.strip
   	     if keyword=="menu"
   	          list
@@ -101,9 +101,9 @@ class SmartphoneFinder::CLI
 	    end
       def show_device_spec(size,option,index=nil)
 	         if option=="1"
-             puts "Print device index to show related speceifications , Print '(B)ack' to go to brevious menu , OR Print 'menu' to list the main menu"
+             puts "Enter device index to show related speceifications , Enter '(B)ack' to go to brevious menu , OR Enter 'menu' to list the main menu"
            else 
-		          puts "Print device index to show related speceifications , Print '(R)etry' to try different keyword , OR Print 'menu' to list the main menu"
+		          puts "Enter device index to show related speceifications , Enter '(R)etry' to try different keyword , OR Enter 'menu' to list the main menu"
            end
 		      input_ = gets.strip
           index_=input_.to_i-1
@@ -114,7 +114,7 @@ class SmartphoneFinder::CLI
               SmartphoneFinder::Device.all[index_].specifications.display
               puts ""            
               #show navigation options
-              puts " Print 'menu' for main menu , Print '(B)ack' to go to brevious list "
+              puts " Enter 'menu' for main menu , Enter '(B)ack' to go to brevious list "
               response=gets.strip
               if response.downcase=="b" || response.downcase=="back" 
 
