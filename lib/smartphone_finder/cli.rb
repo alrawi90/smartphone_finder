@@ -10,7 +10,7 @@ class SmartphoneFinder::CLI
        menu
 	  end
 
-	  def welcome
+	  def welcome#welcom user and display the current version
 		  puts ""
 		  puts "welcome to Smartphone Finder version #{SmartphoneFinder::VERSION}"
 	  end
@@ -99,10 +99,10 @@ class SmartphoneFinder::CLI
   	        end
   	     end
 	    end
-      def show_device_spec(size,option,index=nil)
-	         if option=="1"
+      def show_device_spec(size,option,index=nil)#displaying device specifications
+	        if option=="1"
              puts "Enter device index to show related speceifications , Enter '(B)ack' to go to brevious menu , OR Enter 'menu' to list the main menu"
-           else 
+          else 
 		          puts "Enter device index to show related speceifications , Enter '(R)etry' to try different keyword , OR Enter 'menu' to list the main menu"
            end
 		      input_ = gets.strip
@@ -110,6 +110,7 @@ class SmartphoneFinder::CLI
 
 		      if input_.to_i >0 && input_.to_i <= size
               SmartphoneFinder::Scraper.get_device_spec(SmartphoneFinder::Device.all[index_])
+              puts ""
               puts "Displaying specifications for #{(SmartphoneFinder::Device.all[index_]).name} devices ........"
               SmartphoneFinder::Device.all[index_].specifications.display
               puts ""            
@@ -117,7 +118,7 @@ class SmartphoneFinder::CLI
               puts " Enter 'menu' for main menu , Enter '(B)ack' to go to brevious list "
               response=gets.strip
               if response.downcase=="b" || response.downcase=="back" 
-
+                 #calling the correct method according to the chosen option
                 option=="2" ? show_search_results : show_devices(index)
                 show_device_spec(size,option, index )
               else 
