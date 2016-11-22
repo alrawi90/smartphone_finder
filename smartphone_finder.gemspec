@@ -3,7 +3,7 @@ lib = File.expand_path('../lib', __FILE__)
 $LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
 require 'smartphone_finder/version'
 Gem::Specification.new do |spec|
-  spec.name          = 'smartphone_finder'
+  #spec.name          = 'smartphone_finder'
   spec.authors       = ['Ali ALrawi']
   spec.email         = ['ali.developer90@gmail.com']
   spec.description   = 'Phones Specifications CLI App via scraping data online from gsmarena.com'
