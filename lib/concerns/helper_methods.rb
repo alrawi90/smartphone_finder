@@ -3,13 +3,13 @@ module HelperMethods
    def obj_exist?
         self.class.all.detect{|obj| obj.name == self.name}
     end
-    def list_all(array) #this method will print brands in 3 colomns
+    def list_all(array) #this method will print lists in 3 colomns
 			counter=0
 			sep= "----------------------------------------------------------------"
 			indention=" "
 			extra=" "	
 
-            object =array.max{|a, b| a.length <=> b.length}
+            object =array.max{|a, b| a.length <=> b.length} #get the longest list entry
         	width=object.length + 5
     		while counter <array.size
 	    	     counter <9 ? extra=" " : extra=""
