@@ -1,9 +1,10 @@
+require 'open-uri'
 class SmartphoneFinder::Scraper
     DOMAIN="http://gsmarena.com/"
 
 
 	def self.get_brands
-	  html= open(DOMAIN)
+	  html= URI.open(DOMAIN)
 	  scrapped=Nokogiri::HTML(html)	
 	  scrapped.css(".brandmenu-v2 ul li a").each do |e|
 
@@ -13,7 +14,7 @@ class SmartphoneFinder::Scraper
 	end
 	def self.get_devices_by_brand(brand)
 		url=brand.url
-	  html= open(DOMAIN+url)
+	  html= URI.open(DOMAIN+url)
 	  scrapped=Nokogiri::HTML(html)	
 	  scrapped.css(".makers ul li a").each do |a|
 	  device=SmartphoneFinder::Device.new(a.css("span").text,a.attribute("href").value,brand)
@@ -23,7 +24,7 @@ class SmartphoneFinder::Scraper
    def self.get_device_spec(device)
    	  spec_table=""
    	  url=device.url
-	  html= open(DOMAIN+url)
+	  html= URI.open(DOMAIN+url)
 	  scrapped=Nokogiri::HTML(html)	
 	  scrapped.css("#specs-list table").each do |table|
 	  	spec_table=spec_table + table.css("th").text + ":\n"
@@ -37,7 +38,7 @@ class SmartphoneFinder::Scraper
    def self.get_by_keyword(keyword)
          self.get_brands
          search_results=[]
-         html =  open(DOMAIN+"results.php3?sQuickSearch=yes&sName="+keyword)
+         html =  URI.open(DOMAIN+"results.php3?sQuickSearch=yes&sName="+keyword)
          scrapped = Nokogiri::HTML(html)
          scrapped.css("div.makers ul a").each do |a|
             device_name_no_php=a.attribute("href").value.split("-")

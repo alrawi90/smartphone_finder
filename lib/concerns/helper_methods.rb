@@ -21,7 +21,7 @@ module HelperMethods
 	              elsif array.size - counter  >=2
 	                 col_1=array[counter]; col_1_spc=indention*(width - col_1.length)
 	                 col_2=array[counter+1];
-	                 puts "#{counter+1}- {extra}#{col_1}#{col_1_spc}#{counter+2}- #{extra}#{col_2}"
+	                 puts "#{counter+1}- #{extra}#{col_1}#{col_1_spc}#{counter+2}- #{extra}#{col_2}"
 	              elsif array.size - counter  >=1
 	                 col_1=array[counter];
 	                 puts "#{counter+1}- #{extra}#{col_1}"
